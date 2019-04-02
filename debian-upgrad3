@@ -1,0 +1,29 @@
+#!/bin/bash
+### Upgrade Deb8 to Deb9
+
+Check 3rd-party
+aptitude search '~o'
+
+###
+apt-get update
+apt-get upgrade -y
+apt-get dist-upgrade -y
+dpkg -C
+apt-mark showhold
+
+## Backup Repository
+cp /etc/apt/sources.list /etc/apt/sources.list_backup
+
+### Change Repository
+sed -i 's/jessie/stretch/g' /etc/apt/sources.list
+
+## Upgrade to 9
+apt-get update
+apt list --upgradable
+apt-get upgrade -y
+apt-get dist-upgrade -y
+aptitude search '~o'
+
+##
+echo "Upgrade Finish"
+reboot
