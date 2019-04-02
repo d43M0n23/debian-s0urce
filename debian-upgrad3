@@ -4,6 +4,8 @@
 Check 3rd-party
 aptitude search '~o'
 
+##
+apt-get remove fai2ban -y
 ###
 apt-get update
 apt-get upgrade -y
@@ -24,6 +26,8 @@ apt-get upgrade -y
 apt-get dist-upgrade -y
 aptitude search '~o'
 
+# Install Fail2ban
+apt-get install fail2ban -y
 ##
 echo "Upgrade Finish"
 reboot
