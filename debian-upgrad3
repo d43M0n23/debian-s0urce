@@ -6,9 +6,9 @@ aptitude search '~o'
 
 ##
 apt-get remove fail2ban -y
-echo -e "\nFail2ban wird removed";
+echo -e "\nFail2ban wird removed\n";
 ###
-echo -e "\Upgrade Debian 8"
+echo -e "\nUpgrade Debian 8\n"
 apt-get update
 apt-get upgrade -y --force-yes
 apt-get dist-upgrade -y --force-yes
@@ -16,15 +16,16 @@ dpkg -C
 apt-mark showhold
 
 ## Backup Repository
-echo -e "\nSourceliste wird kopiert"
+echo -e "\nSourceliste wird kopiert\n"
 cp /etc/apt/sources.list /etc/apt/sources.list_backup
 
 ### Change Repository
 sed -i 's/jessie/stretch/g' /etc/apt/sources.list
-echo -e "\nNeue Sourceliste angelegt"
+echo -e "\nNeue Sourceliste angelegt\n"
 
 
 ## Upgrade to 9
+echo -e "\nUpgrade to Debian 9\n"
 apt-get update
 apt list --upgradable
 apt-get upgrade -y
@@ -32,6 +33,7 @@ apt-get dist-upgrade -y
 aptitude search '~o'
 
 # Install Fail2ban
+echo -e "\Install Fail2ban\n"
 apt-get install fail2ban -y
 ##
 echo "Upgrade Finish"
