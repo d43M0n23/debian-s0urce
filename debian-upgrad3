@@ -1,23 +1,28 @@
 #!/bin/bash
 ### Upgrade Deb8 to Deb9
 
-Check 3rd-party
+##Check 3rd-party
 aptitude search '~o'
 
 ##
-apt-get remove fai2ban -y
+apt-get remove fail2ban -y
+echo -e "\nFail2ban wird removed";
 ###
+echo -e "\Upgrade Debian 8"
 apt-get update
-apt-get upgrade -y -f
-apt-get dist-upgrade -y -f 
+apt-get upgrade -y --force-yes
+apt-get dist-upgrade -y --force-yes
 dpkg -C
 apt-mark showhold
 
 ## Backup Repository
+echo -e "\nSourceliste wird kopiert"
 cp /etc/apt/sources.list /etc/apt/sources.list_backup
 
 ### Change Repository
 sed -i 's/jessie/stretch/g' /etc/apt/sources.list
+echo -e "\nNeue Sourceliste angelegt"
+
 
 ## Upgrade to 9
 apt-get update
