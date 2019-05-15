@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#########################################
+### Sync old mail accounts 2 new postdir#
+#########################################
+
+## Struktur ##
+## old $base /var/mail/virtual/DOMAIN/USER/FOLDER
+## new $base /var/vmail/DOMAIN/USER/Maildir/
+
+
+
+
+
+## Schleife
+
+#for file in *;
+#do
+#  find "$file" -type f -not -name ".*" | grep .exe$ | grep RARBG | while read file
+#  do
+#        echo $file gefunden. - REMOVE | tee -a remove_txt.log >> $elitelog
+#        rm $file
+#  done
+#done
+
+
