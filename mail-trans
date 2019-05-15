@@ -8,7 +8,9 @@
 ## old $base /var/mail/virtual/DOMAIN/USER/FOLDER
 ## new $base /var/vmail/DOMAIN/USER/Maildir/
 
-
+#Variablen
+domain=xcoorp.net
+elitelog=account_${domain}.txt
 
 
 
@@ -23,4 +25,16 @@
 #  done
 #done
 
+cd $domain
 
+for file in *;
+do
+  find "$file" -maxdepth 1 -type d | while read file
+  do
+        pfad=$(readlink -f "$file")
+        echo $file  >> $elitelog
+       # Anweisung rm -r $file
+  done
+done
+
+cd ..
