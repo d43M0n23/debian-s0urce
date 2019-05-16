@@ -8,6 +8,12 @@
 ## old $base /var/mail/virtual/DOMAIN/USER/FOLDER
 ## new $base /var/vmail/DOMAIN/USER/Maildir/
 
+## Workflow ##
+## 1 Copy Domain und mailboxen an anderen ORT !
+## rsync -avzh /var/mail/virtual/xcoorp.net/ /root/Mailsource/xcoorp.net/
+## 2 
+
+
 #Variablen
 domain=xcoorp.net
 elitelog=account_${domain}.txt
@@ -25,16 +31,35 @@ elitelog=account_${domain}.txt
 #  done
 #done
 
-cd $domain
+#### PHASE 1 ####
+#### Vorbereitung - Copy - Remove Folder and old Files.
+#### modify subscribe tags
+
+
+rsync -avzh /var/mail/virtual/${domain}/ /root/Mailsource/${domain}/
+
+cd /root/Mailsource/$domain
 
 for file in *;
 do
-  find "$file" -maxdepth 1 -type d | while read file
+ # find "$file" -maxdepth 1 -type d | while read file
+  find "$file" -type d | while read file
   do
         pfad=$(readlink -f "$file")
-        echo $file  >> $elitelog
-       # Anweisung rm -r $file
+	cd $file;
+	rm -r courierimapkeywords courierimapuiddb;
+	# remove INBOX Tag in subscribed
+	sed -i 's/INBOX.//g' courierimapsubscribed;
+	mv courierimapsubscribed subscriptions;
+        echo $file >> $elitelog;
+        # Anweisung rm -r $file
+	cd ..
   done
 done
 
-cd ..
+#cd ..
+exit
+#### Phase 2 Sync to new Server
+
+
+
